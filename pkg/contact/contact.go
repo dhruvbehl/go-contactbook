@@ -8,11 +8,11 @@ import (
 )
 
 var contactBook = []api.Contact{{
-	Id:        "1",
-	FirstName: "Dhruv",
-	LastName:  "Behl",
-	Phone:     "9123343212",
-	Address:   "Mock Address, Mock city, Mock Country",
+	Id:        "100",
+	FirstName: "MockFirstName",
+	LastName:  "MockLastName",
+	Phone:     "xxxxxxxxxx",
+	Address:   "MockAddress",
 }}
 
 func GetAllContact() (*[]api.Contact, error) {
