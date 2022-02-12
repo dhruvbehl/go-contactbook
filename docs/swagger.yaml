@@ -1,0 +1,138 @@
+basePath: /
+definitions:
+  api.Contact:
+    properties:
+      address:
+        type: string
+      firstname:
+        type: string
+      id:
+        type: string
+      lastname:
+        type: string
+      phone:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: dhruvbhl@gmail.com
+    name: Dhruv Behl
+  description: Contact book written in golang with the purpose of learning golang
+    rest framework gin
+  termsOfService: http://swagger.io/terms/
+  title: Contact Book
+  version: "1.0"
+paths:
+  /contact:
+    post:
+      consumes:
+      - application/json
+      description: Create contact
+      operationId: CreateContact
+      parameters:
+      - description: Contact Request Body
+        in: body
+        name: contactRequest
+        required: true
+        schema:
+          $ref: '#/definitions/api.Contact'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/api.Contact'
+            type: object
+      summary: Create contact
+  /contact/{id}:
+    delete:
+      consumes:
+      - '*/*'
+      description: Delete contact by id "Contact ID"
+      operationId: DeleteContactById
+      parameters:
+      - description: Contact ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete contact by id
+    get:
+      consumes:
+      - '*/*'
+      description: Show contact by id
+      operationId: GetContactById
+      parameters:
+      - description: Contact ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/api.Contact'
+            type: object
+      summary: Show contact by id
+    put:
+      consumes:
+      - application/json
+      description: Update contact
+      operationId: UpdateContact
+      parameters:
+      - description: Contact ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Contact Request Body
+        in: body
+        name: contactRequest
+        required: true
+        schema:
+          $ref: '#/definitions/api.Contact'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/api.Contact'
+            type: object
+      summary: Update contact
+  /contacts:
+    get:
+      consumes:
+      - '*/*'
+      description: Show all the contacts stored on the server
+      operationId: GetAllContact
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties:
+                items:
+                  $ref: '#/definitions/api.Contact'
+                type: array
+              type: object
+            type: array
+      summary: Show all the contacts stored on the server
+schemes:
+- http
+swagger: "2.0"
