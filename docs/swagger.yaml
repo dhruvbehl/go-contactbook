@@ -1,5 +1,13 @@
 basePath: /
 definitions:
+  api.ApiResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
   api.Contact:
     properties:
       address:
@@ -43,9 +51,15 @@ paths:
         "201":
           description: Created
           schema:
-            additionalProperties:
-              $ref: '#/definitions/api.Contact'
-            type: object
+            $ref: '#/definitions/api.ApiResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
       summary: Create contact
   /contact/{id}:
     delete:
@@ -63,7 +77,13 @@ paths:
       - application/json
       responses:
         "200":
-          description: ""
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
+        "204":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
       summary: Delete contact by id
     get:
       consumes:
@@ -82,9 +102,11 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties:
-              $ref: '#/definitions/api.Contact'
-            type: object
+            $ref: '#/definitions/api.ApiResponse'
+        "204":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
       summary: Show contact by id
     put:
       consumes:
@@ -109,9 +131,15 @@ paths:
         "201":
           description: Created
           schema:
-            additionalProperties:
-              $ref: '#/definitions/api.Contact'
-            type: object
+            $ref: '#/definitions/api.ApiResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
       summary: Update contact
   /contacts:
     get:
@@ -126,12 +154,12 @@ paths:
           description: OK
           schema:
             items:
-              additionalProperties:
-                items:
-                  $ref: '#/definitions/api.Contact'
-                type: array
-              type: object
+              $ref: '#/definitions/api.ApiResponse'
             type: array
+        "204":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ApiResponse'
       summary: Show all the contacts stored on the server
 schemes:
 - http

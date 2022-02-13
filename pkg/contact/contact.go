@@ -16,6 +16,10 @@ var contactBook = []api.Contact{{
 }}
 
 func GetAllContact() (*[]api.Contact, error) {
+	if len(contactBook) == 0 {
+		log.Error().Msgf("no contact found")
+		return nil, fmt.Errorf("no contact found")
+	}
 	return &contactBook, nil
 }
 

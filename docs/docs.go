@@ -46,10 +46,19 @@ const docTemplate_swagger = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "$ref": "#/definitions/api.Contact"
-                            }
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
                         }
                     }
                 }
@@ -79,10 +88,13 @@ const docTemplate_swagger = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "$ref": "#/definitions/api.Contact"
-                            }
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
+                    },
+                    "204": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
                         }
                     }
                 }
@@ -119,10 +131,19 @@ const docTemplate_swagger = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "$ref": "#/definitions/api.Contact"
-                            }
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
                         }
                     }
                 }
@@ -148,7 +169,16 @@ const docTemplate_swagger = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
+                    },
+                    "204": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
+                        }
                     }
                 }
             }
@@ -170,14 +200,14 @@ const docTemplate_swagger = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/api.Contact"
-                                    }
-                                }
+                                "$ref": "#/definitions/api.ApiResponse"
                             }
+                        }
+                    },
+                    "204": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ApiResponse"
                         }
                     }
                 }
@@ -185,6 +215,18 @@ const docTemplate_swagger = `{
         }
     },
     "definitions": {
+        "api.ApiResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
         "api.Contact": {
             "type": "object",
             "properties": {
